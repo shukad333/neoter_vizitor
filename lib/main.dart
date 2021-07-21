@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:qr_test/all_visitors.dart';
 import 'package:qr_test/home_page.dart';
 import 'package:qr_test/profile.dart';
 import 'package:qr_test/scanner.dart';
@@ -60,7 +61,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
 
-    final _pages = <Widget>[HomePage(), ProfilePage(),Scanner()];
+    final _pages = <Widget>[HomePage(), ProfilePage(),Scanner(),AllVisitors()];
 
     void setPage(index) {
       print("Setting index $index");
@@ -79,11 +80,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
       body: _pages[selectedIndex],
       bottomNavigationBar: BottomNavigationBar(
+        type: BottomNavigationBarType.fixed,
         currentIndex: selectedIndex,
         items: [
           BottomNavigationBarItem(icon: Icon(Icons.home),label: 'Home'),
           BottomNavigationBarItem(icon: Icon(Icons.account_circle),label: 'Profile'),
-          BottomNavigationBarItem(icon: Icon(Icons.camera),label: 'Scan')
+          BottomNavigationBarItem(icon: Icon(Icons.camera),label: 'Scan'),
+          BottomNavigationBarItem(icon: Icon(Icons.people),label: 'Visitors')
         ],
         onTap: (index) {
           setPage(index);

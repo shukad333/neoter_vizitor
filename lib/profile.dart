@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qr_test/constants.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -101,7 +102,8 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: 'Title',
+            // hintText: 'Title',
+            labelText: 'Name',
             hintStyle: TextStyle(color: Colors.blue),
           ),
           validator: (title) =>
@@ -112,20 +114,23 @@ class _ProfilePageState extends State<ProfilePage> {
           maxLines: 1,
           initialValue: number.isEmpty?'':number,
           style: TextStyle(
-            color: Colors.blue,
+            color: PRIMARY_TEXT_COLOR,
             fontWeight: FontWeight.bold,
             fontSize: 24,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            hintText: 'Title',
-            hintStyle: TextStyle(color: Colors.blue),
+            // hintText: 'Title',
+            labelText: 'Phone Number',
+            hintStyle: TextStyle(color: PRIMARY_TEXT_COLOR),
           ),
           validator: (number) =>
           number != null && number.isEmpty ? 'The number cannot be empty' : null,
           onChanged: (str) => onChangedNumber(str),
         ),
-        ElevatedButton(child: Text('Save'),onPressed:saveProfile)
+        ElevatedButton(child: Text('Save'),onPressed:saveProfile),
+
+
       ],
     );
   }
