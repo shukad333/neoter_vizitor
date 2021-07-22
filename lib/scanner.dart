@@ -40,6 +40,7 @@ class _ScannerState extends State<Scanner> {
       setState(() {
         name = sp[0];
         number = sp[1];
+        saveVisitor();
       });
     }
   }
@@ -72,6 +73,11 @@ class _ScannerState extends State<Scanner> {
     });
   }
 
+  void scanAndUpdate() {
+    _scan();
+    // saveVisitor();
+  }
+
   Widget input() {
     return Column(
       children: [
@@ -102,7 +108,7 @@ class _ScannerState extends State<Scanner> {
           endIndent: 20,
         ),
         Padding(padding: EdgeInsets.only(top: 200)),
-        ElevatedButton(onPressed: _scan, child: Text('Scan QR'))
+        ElevatedButton(onPressed: scanAndUpdate, child: Text('Scan QR'))
       ],
     );
   }

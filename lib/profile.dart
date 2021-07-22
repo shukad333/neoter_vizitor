@@ -15,6 +15,9 @@ class _ProfilePageState extends State<ProfilePage> {
   bool isLoading = true;
   bool edit = false;
 
+  TextEditingController nameController = new TextEditingController();
+  TextEditingController numberController = new TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
     print('Init...');
@@ -81,20 +84,43 @@ class _ProfilePageState extends State<ProfilePage> {
 
   void saveProfile() {
 
-    setPref('name', name);
-    setPref('number', number);
-    setState(() {
-      edit = false;
-    });
+    print('saving...');
+    final FormState? form = _formKey.currentState;
+    if(form!.validate()) {
+      String n = nameController.text;
+      String num = numberController.text;
+      print('$n $num');
+      if(n.isNotEmpty && num.isNotEmpty) {
+        setState(() {
+          name = n;
+          number = num;
+
+        });
+        setPref('name', name);
+        setPref('number', number);
+        setState(() {
+          edit = false;
+        });
+      }
+    }
+    if(!form.validate()) {
+      print("error");
+    }
+
+
+
   }
 
 
   Widget inputDetails() {
-    return Column(
+    return Form(
+        key: _formKey,
+        child:Column(
       children: [
         TextFormField(
+          controller: nameController,
           maxLines: 1,
-          initialValue: name.isEmpty?'':name,
+          // initialValue: name.isEmpty?'':name,
           style: TextStyle(
             color: Colors.blue,
             fontWeight: FontWeight.bold,
@@ -107,12 +133,13 @@ class _ProfilePageState extends State<ProfilePage> {
             hintStyle: TextStyle(color: Colors.blue),
           ),
           validator: (title) =>
-          title != null && title.isEmpty ? 'The title cannot be empty' : null,
-          onChanged: (str) => onChangedTitle(str),
+          title != null && title.isEmpty ? 'The Name cannot be empty' : null,
+          // onChanged: (str) => onChangedTitle(str),
         ),
         TextFormField(
+          controller: numberController,
           maxLines: 1,
-          initialValue: number.isEmpty?'':number,
+          // initialValue: number.isEmpty?'':number,
           style: TextStyle(
             color: PRIMARY_TEXT_COLOR,
             fontWeight: FontWeight.bold,
@@ -125,13 +152,14 @@ class _ProfilePageState extends State<ProfilePage> {
             hintStyle: TextStyle(color: PRIMARY_TEXT_COLOR),
           ),
           validator: (number) =>
-          number != null && number.isEmpty ? 'The number cannot be empty' : null,
-          onChanged: (str) => onChangedNumber(str),
+          (number != null && number.isEmpty) || (number!=null && number.length!=10)? 'The number is invalid' : null,
+          // onChanged: (str) => onChangedNumber(str),
         ),
         ElevatedButton(child: Text('Save'),onPressed:saveProfile),
 
 
       ],
+    )
     );
   }
 
