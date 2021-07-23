@@ -49,7 +49,7 @@ class _ScannerState extends State<Scanner> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Scanned'),
+          title: Text('Scanner'),
         ),
         body: input());
   }

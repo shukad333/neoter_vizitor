@@ -16,10 +16,12 @@ class _ProfilePageState extends State<ProfilePage> {
   bool edit = false;
 
   TextEditingController nameController = new TextEditingController();
+
   TextEditingController numberController = new TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   @override
   void initState() {
+
     print('Init...');
     super.initState();
     _initializePref();
@@ -49,7 +51,7 @@ class _ProfilePageState extends State<ProfilePage> {
         child: isLoading
             ? CircularProgressIndicator():edit?inputDetails()
             : name.isEmpty? inputDetails()
-            : details()
+            : buildName()
       ),
     );
   }
@@ -58,6 +60,9 @@ class _ProfilePageState extends State<ProfilePage> {
     setState(() {
       edit = true;
     });
+    nameController.text = name;
+    numberController.text = number;
+
   }
   Widget editButton() {
     return IconButton(onPressed:setEdit , icon: Icon(Icons.edit));
@@ -163,6 +168,23 @@ class _ProfilePageState extends State<ProfilePage> {
     );
   }
 
+  Widget buildName() => Column(
+    children: [
+      const SizedBox(height: 100),
+      ClipOval(child: Image.asset("images/prof.jpeg",width: 200,height: 200)),
+      const SizedBox(height: 12),
+
+      Text(
+        name,
+        style: TextStyle(fontWeight: FontWeight.bold, fontSize: 30),
+      ),
+      const SizedBox(height: 12),
+      Text(
+        number,
+        style: TextStyle(color: Color(0xFF343131),fontSize: 20),
+      )
+    ],
+  );
   Widget details() {
     return Card(
 

@@ -49,14 +49,20 @@ class _HomePageState extends State<HomePage> {
         // in the middle of the parent.
 
         child: loaded?name.isEmpty?emptyAdd():Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
 
           children: <Widget>[
+
+             const SizedBox(height: 20),
+            ClipOval(child: Image.asset('images/scan.jpeg',height: 200,width: 200,)),
+            const SizedBox(height: 20),
             QrImage(
               data: "$name#$number",
               version: QrVersions.auto,
               size: 200.0,
             ),
+            const SizedBox(height: 20),
+            Text("Scan your QR from another device",style: TextStyle(fontSize: 20,fontStyle: FontStyle.italic),),
 
           ],
         ):CircularProgressIndicator()

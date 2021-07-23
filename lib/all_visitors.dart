@@ -77,6 +77,7 @@ class _AllVisitorsState extends State<AllVisitors> {
           margin: new EdgeInsets.symmetric(horizontal: 10.0,
               vertical: 6.0),
           child: Container(
+            color: Color(0xFFECE8BF),
             child: ListTile(
               contentPadding:
               EdgeInsets.symmetric(horizontal: 20.0,
