@@ -71,13 +71,13 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget emptyAdd() {
-    return Column(
-      children: [
+    return Center(
+      child:
         Text(
-          'Please Add details in Profile Page',
+          'Please Add details in Profile Page to generate your QR',
           style: TextStyle(color: Colors.red,fontWeight: FontWeight.bold),
         ),
-      ],
+
     );
   }
 }
