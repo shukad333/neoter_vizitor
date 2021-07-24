@@ -73,7 +73,9 @@ class _MyHomePageState extends State<MyHomePage> {
       });
     }
 
-    return Scaffold(
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
 
       // body: IndexedStack(
       //   index: selectedIndex,
@@ -95,6 +97,8 @@ class _MyHomePageState extends State<MyHomePage> {
         },
 
       ),
+    )
     );
+
   }
 }
